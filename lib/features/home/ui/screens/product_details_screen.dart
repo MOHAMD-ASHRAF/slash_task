@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:slash_task/features/home/models/prouduct.dart';
 import '../widgets/body_of_product_details_screen.dart';
 
 
 class ProductsDetailsScreen extends StatelessWidget {
-  const ProductsDetailsScreen({super.key});
+  final ProductModel productModel;
+  const ProductsDetailsScreen({super.key, required this.productModel});
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -3,7 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slash_task/features/home/logic/bloc_observer.dart';
 import 'package:slash_task/features/home/logic/slash_cubit.dart';
-import 'features/home/ui/screens/product_details_screen.dart';
+import 'features/home/ui/screens/home_screen.dart';
+
 
 void main() async {
   Bloc.observer = MyBlocObserver();
@@ -27,7 +28,7 @@ class MyApp extends StatelessWidget {
               colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
               useMaterial3: true,
             ),
-            home: ProductsDetailsScreen()
+            home: HomeScreen()
         ),
       ),
     );

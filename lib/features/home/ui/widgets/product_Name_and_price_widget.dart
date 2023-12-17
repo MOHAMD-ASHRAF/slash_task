@@ -18,7 +18,7 @@ class ProductNameAndPriceWidget extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(choseBrand,style: TextStyles.font17WhiteBold,maxLines: 1,overflow: TextOverflow.ellipsis,),
+              Text('chose Brand',style: TextStyles.font17WhiteBold,maxLines: 1,overflow: TextOverflow.ellipsis,),
               SizedBox(height: 12.h,),
               Text('\$120',style: TextStyles.font15WhiteRegular),
             ],

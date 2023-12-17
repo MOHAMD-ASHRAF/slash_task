@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
 
+
+
 part 'slash_state.dart';
 
 class SlashCubit extends Cubit<SlashState> {
@@ -38,6 +40,7 @@ class SlashCubit extends Cubit<SlashState> {
     'lace',
 
   ];
+
   void initState() {
     pageController =
         PageController(initialPage: currentPage, viewportFraction: 0.8);

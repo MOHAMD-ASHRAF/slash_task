@@ -1,14 +1,54 @@
-// class Product {
-//   final int id;
-//   final String name;
-//   final String description;
-//   final int brandId;
-//   final String? brandName;
-//   final String? brandLogoUrl;
-//   final double rating;
-//   final List<ProductVariation> variations;
-//   final List<ProductProperty> availableProperties;//What properties are offered //(multiple colors or non, multiple sizes or non, materials)
-// }
+class ProductModel {
+  final int id;
+  final int price;
+  final String name;
+  final String description;
+  final String? brandName;
+  final String image;
+  final double rating;
+  final List<String> moreImage;
+  ProductModel(
+      {required this.id,
+        required this.moreImage,
+        required this.name,
+      required this.description,
+      this.brandName,
+      required this.image,
+        required this.price,
+      required this.rating});
+
+}
+
+class ProductProperty {
+  final String property;
+  final String value;
+
+  ProductProperty(this.property, this.value);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 class Product{
   final String image;
