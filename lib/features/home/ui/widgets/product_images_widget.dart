@@ -13,16 +13,16 @@ class ProductImagesWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<SlashCubit, SlashState>(
-      listener: (context, state) {
-        // TODO: implement listener
-      },
+    return BlocBuilder<SlashCubit, SlashState>(
       builder: (context, state) {
         return Column(
           children: [
             AspectRatio(
               aspectRatio: 1.4,
               child: PageView.builder(
+                onPageChanged: (index){
+                    BlocProvider.of<SlashCubit>(context).changeImage(index);
+                    },
                   itemCount: imageList.length,
                   physics: const ClampingScrollPhysics(),
                   controller:  BlocProvider.of<SlashCubit>(context).pageController,
@@ -48,8 +48,8 @@ class ProductImagesWidget extends StatelessWidget {
                 itemBuilder: (context, index) {
                   return GestureDetector(
                     onTap: () {
-                      selectedIndex: BlocProvider.of<SlashCubit>(context).changeImage(index);
-                    },
+                      BlocProvider.of<SlashCubit>(context).changeImage(index);
+                       },
                     child: ItemBuilder(
                       selectedIndex: BlocProvider.of<SlashCubit>(context).selectedImageIndex,
                       image: imageList[index].image, index: index,
@@ -77,7 +77,6 @@ class ProductImagesWidget extends StatelessWidget {
           if (BlocProvider.of<SlashCubit>(context).pageController.position.haveDimensions) {
             value = index.toDouble() - (BlocProvider.of<SlashCubit>(context).pageController.page ?? 0);
             value = (value * 0.038).clamp(-1, 1);
-            print("value $value index $index");
           }
           return Transform.rotate(
               angle: pi * value, child: carouselCard(imageList[index]));
@@ -85,26 +84,24 @@ class ProductImagesWidget extends StatelessWidget {
   }
 
   Widget carouselCard(Product product) {
-    return Expanded(
-      child: Padding(
-        padding: const EdgeInsets.all(20),
-        child: Container(
-          decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(30),
-              image: DecorationImage(
-                  image: AssetImage(
-                    product.image,
-                  ),
-                  fit: BoxFit.fill),
-              boxShadow: const [
-                BoxShadow(
-                  offset: Offset(0, 4),
-                  blurRadius: 4,
-                  color: Colors.black26,
-                )
-              ]),
-        ),
+    return Padding(
+      padding: const EdgeInsets.all(20),
+      child: Container(
+        decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(30),
+            image: DecorationImage(
+                image: AssetImage(
+                  product.image,
+                ),
+                fit: BoxFit.fill),
+            boxShadow: const [
+              BoxShadow(
+                offset: Offset(0, 4),
+                blurRadius: 4,
+                color: Colors.black26,
+              )
+            ]),
       ),
     );
   }

@@ -6,8 +6,8 @@ part 'slash_state.dart';
 
 class SlashCubit extends Cubit<SlashState> {
   SlashCubit() : super(SlashInitial());
-   late PageController pageController;
-  final int currentPage = 0;
+  late PageController pageController;
+  int currentPage = 0;
   int selectedImageIndex = -1;
   int selectedMaterialIndex = -1;
   List myColors = <Color>[
@@ -19,22 +19,19 @@ class SlashCubit extends Cubit<SlashState> {
     Colors.blue
   ];
 
-  void selectMaterial(int index){
-   selectedMaterialIndex = index;
-   emit(SelectMaterialState());
+  void initState() {
+    pageController =
+        PageController(initialPage: currentPage, viewportFraction: 0.8);
+    emit(ChangePageViewState());
   }
 
-
-
-  void changeImage(int index){
+  void changeImage(int index) {
     selectedImageIndex = index;
     emit(ChangeImageState());
   }
 
-
-  void initState() {
-    pageController =
-        PageController(initialPage: currentPage, viewportFraction: 0.8);
+  void selectMaterial(int index) {
+    selectedMaterialIndex = index;
+    emit(SelectMaterialState());
   }
-
 }
