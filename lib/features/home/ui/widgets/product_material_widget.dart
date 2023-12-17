@@ -4,16 +4,15 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:slash_task/features/home/logic/slash_cubit.dart';
 
 import '../../../../core/theming/text_style.dart';
+import '../../../../core/widgets/select_item_widget.dart';
 
 
-class SelectMaterialWidget extends StatelessWidget {
-  const SelectMaterialWidget({super.key});
+class ProductMaterialWidget extends StatelessWidget {
+  const ProductMaterialWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<SlashCubit, SlashState>(
-      listener: (context, state) {
-      },
+    return BlocBuilder<SlashCubit, SlashState>(
       builder: (context, state) {
         return Padding(
           padding: const EdgeInsets.all(20),
@@ -32,15 +31,15 @@ class SelectMaterialWidget extends StatelessWidget {
                 child: ListView.separated(
                   shrinkWrap: true,
                   scrollDirection: Axis.horizontal,
-                  itemCount: 5,
+                  itemCount: SlashCubit.get(context).material.length,
                   itemBuilder: (BuildContext context, int index) {
                     return GestureDetector(
                         onTap: () {
-                          BlocProvider.of<SlashCubit>(context).selectMaterial(index);
+                          SlashCubit.get(context).changeMaterial(index);
                         },
-                        child: ItemBuilderWidget(
-                          selectedIndex: BlocProvider.of<SlashCubit>(context).selectedMaterialIndex,
-                          index: index,
+                        child: SelectItemWidget(
+                          selectedIndex: SlashCubit.get(context).selectedMaterialIndex,
+                          index: index, title: SlashCubit.get(context).material[index], width: 80,
                         ));
                   },
                   separatorBuilder: (BuildContext context, int index) {
@@ -58,30 +57,4 @@ class SelectMaterialWidget extends StatelessWidget {
   }
 }
 
-class ItemBuilderWidget extends StatelessWidget {
-  const ItemBuilderWidget({
-    super.key,
-    required this.selectedIndex,
-    required this.index,
-  });
 
-  final int selectedIndex;
-  final int index;
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 45.h,
-      width: 100.w,
-      decoration: BoxDecoration(
-          color: Colors.green,
-          border: Border.all(
-            color: selectedIndex == index ? Colors.white : Colors.green,
-            width: 2,
-          ),
-          borderRadius: BorderRadius.circular(12)),
-      child: Center(
-        child: Text('Select', style: TextStyles.font15WhiteRegular),
-      ),
-    );
-  }
-}

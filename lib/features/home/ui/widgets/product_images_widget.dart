@@ -21,20 +21,15 @@ class ProductImagesWidget extends StatelessWidget {
               aspectRatio: 1.4,
               child: PageView.builder(
                 onPageChanged: (index){
-                    BlocProvider.of<SlashCubit>(context).changeImage(index);
+                    SlashCubit.get(context).changeImage(index);
                     },
                   itemCount: imageList.length,
                   physics: const ClampingScrollPhysics(),
-                  controller:  BlocProvider.of<SlashCubit>(context).pageController,
+                  controller:  SlashCubit.get(context).pageController,
                   itemBuilder: (context, index) {
                     return carouselView(index,context);
                   }),
             ),
-
-
-
-
-
 
             ConstrainedBox(
               constraints: BoxConstraints(
@@ -48,10 +43,10 @@ class ProductImagesWidget extends StatelessWidget {
                 itemBuilder: (context, index) {
                   return GestureDetector(
                     onTap: () {
-                      BlocProvider.of<SlashCubit>(context).changeImage(index);
+                      SlashCubit.get(context).changeImage(index);
                        },
                     child: ItemBuilder(
-                      selectedIndex: BlocProvider.of<SlashCubit>(context).selectedImageIndex,
+                      selectedIndex: SlashCubit.get(context).selectedImageIndex,
                       image: imageList[index].image, index: index,
                     ),
                   );
@@ -71,11 +66,11 @@ class ProductImagesWidget extends StatelessWidget {
 
   Widget carouselView(int index,BuildContext context) {
     return AnimatedBuilder(
-        animation: BlocProvider.of<SlashCubit>(context).pageController,
+        animation: SlashCubit.get(context).pageController,
         builder: (context, child) {
           double value = 0;
-          if (BlocProvider.of<SlashCubit>(context).pageController.position.haveDimensions) {
-            value = index.toDouble() - (BlocProvider.of<SlashCubit>(context).pageController.page ?? 0);
+          if (SlashCubit.get(context).pageController.position.haveDimensions) {
+            value = index.toDouble() - (SlashCubit.get(context).pageController.page ?? 0);
             value = (value * 0.038).clamp(-1, 1);
           }
           return Transform.rotate(

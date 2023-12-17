@@ -2,6 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:slash_task/core/constant/constant.dart';
+import 'package:slash_task/generated/assets.dart';
 import '../../../../core/theming/text_style.dart';
 
 class ProductNameAndPriceWidget extends StatelessWidget {
@@ -16,7 +18,7 @@ class ProductNameAndPriceWidget extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('Men\'s Printed',style: TextStyles.font17WhiteBold,maxLines: 1,overflow: TextOverflow.ellipsis,),
+              Text(choseBrand,style: TextStyles.font17WhiteBold,maxLines: 1,overflow: TextOverflow.ellipsis,),
               SizedBox(height: 12.h,),
               Text('\$120',style: TextStyles.font15WhiteRegular),
             ],
@@ -28,10 +30,10 @@ class ProductNameAndPriceWidget extends StatelessWidget {
               const CircleAvatar(
                 radius: 24,
                 backgroundColor: Colors.white,
-                backgroundImage: AssetImage('assets/images/camera.jpg'),
+                backgroundImage: AssetImage(Assets.imagesLogo),
               ),
               SizedBox(height: 12.h,),
-              Text('nike',style:TextStyles.font15WhiteRegular),
+              Text(nike,style:TextStyles.font15WhiteRegular),
             ],
           ),
 
