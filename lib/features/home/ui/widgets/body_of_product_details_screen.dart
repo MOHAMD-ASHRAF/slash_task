@@ -10,25 +10,27 @@ import 'package:slash_task/features/home/ui/widgets/product_images_widget.dart';
 import 'package:slash_task/features/home/ui/widgets/product_material_widget.dart';
 import 'package:slash_task/features/home/ui/widgets/product_size_widget.dart';
 
+import '../../models/product.dart';
 import 'description_widget.dart';
 
 class BodyOfProductDetailsScreen extends StatelessWidget {
   const BodyOfProductDetailsScreen({
-    super.key,
+    super.key, required this.productModel,
   });
+  final ProductModel productModel;
 
   @override
   Widget build(BuildContext context) {
-    return const SingleChildScrollView(
+    return  SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          ProductImagesWidget(),
-          ProductNameAndPriceWidget(),
+          ProductImagesWidget(productModel: productModel,),
+          ProductNameAndPriceWidget(productModel: productModel,),
           ProductColorsWidget(),
           ProductSizeWidget(),
           ProductMaterialWidget(),
-          DescriptionWidget(),
+          DescriptionWidget(productModel: productModel,),
           AddToCurdWidget(),
         ],
       ),

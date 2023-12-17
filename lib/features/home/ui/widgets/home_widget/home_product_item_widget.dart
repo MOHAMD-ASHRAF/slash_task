@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:slash_task/features/home/logic/slash_cubit.dart';
+import 'package:slash_task/features/home/models/product.dart';
 import 'package:slash_task/features/home/ui/screens/product_details_screen.dart';
 import '../../../../../core/theming/text_style.dart';
 import '../../../../../core/utils/dummy.dart';
-
 
 class HomeProductItemWidget extends StatelessWidget {
   const HomeProductItemWidget({
@@ -23,7 +23,8 @@ class HomeProductItemWidget extends StatelessWidget {
               Text('New Arrival', style: TextStyles.font17WhiteBold),
               const Spacer(),
               Text('View All',
-                  style: TextStyles.font15GrayRegular.copyWith(fontSize: 12.sp)),
+                  style:
+                      TextStyles.font15GrayRegular.copyWith(fontSize: 12.sp)),
             ],
           ),
           const SizedBox(
@@ -51,6 +52,7 @@ class HomeProductItemWidget extends StatelessWidget {
                   ),
                   itemCount: productDummyList.length,
                   itemBuilder: (context, index) {
+                    ProductModel productModel = productDummyList[index];
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -59,8 +61,13 @@ class HomeProductItemWidget extends StatelessWidget {
                             children: [
                               GestureDetector(
                                 onTap: () {
-                                 Navigator.push(context, MaterialPageRoute(builder: (context) =>
-                                     ProductsDetailsScreen(productModel: productDummyList[index])));
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              ProductsDetailsScreen(
+                                                  productModel: productModel))
+                                  );
                                 },
                                 child: Container(
                                     decoration: BoxDecoration(
@@ -70,46 +77,52 @@ class HomeProductItemWidget extends StatelessWidget {
                                     child: ClipRRect(
                                         borderRadius:
                                             BorderRadius.circular(10.0),
-                                        child:  Image(
-                                          image:AssetImage(productDummyList[index].image),
+                                        child: Image(
+                                          image: AssetImage(productModel.image),
                                           fit: BoxFit.fill,
                                           width: double.infinity,
                                         ))),
                               ),
-                               Positioned(
+                              Positioned(
                                   top: 10,
                                   right: 10,
                                   child: CircleAvatar(
                                       radius: 16,
                                       backgroundColor: Colors.grey[500],
-                                      child: Icon(Icons.account_balance_wallet_outlined,color: Colors.white,))
-                              ),
+                                      child: const Icon(
+                                        Icons.favorite_border,
+                                        color: Colors.white,
+                                      ))),
                             ],
                           ),
                         ),
                         const SizedBox(
                           height: 8,
                         ),
-                         Row(
-                           children: [
-                             Text(
-                               productDummyList[index].name,style: TextStyles.font15WhiteRegular,
+                        Row(
+                          children: [
+                            Text(
+                              productModel.name,
+                              style: TextStyles.font15WhiteRegular,
                               overflow: TextOverflow.ellipsis,
                               maxLines: 2,
+                            ),
+                            const Spacer(),
+                            Row(
+                              children: [
+                                Text(productModel.rating.toString(),
+                                    style: TextStyles.font15WhiteRegular),
+                                SizedBox(
+                                  width: 4.w,
+                                ),
+                                const Icon(Icons.star, color: Colors.yellow),
+                              ],
+                            ),
+                          ],
                         ),
-                             Spacer(),
-                             Row(
-                               children: [
-
-                                 Text(productDummyList[index].rating.toString(),style: TextStyles.font15WhiteRegular),
-                                 SizedBox(width: 4.w,),
-                                 Icon(Icons.star,color: Colors.yellow),
-                               ],
-                             ),
-                           ],
-                         ),
-                         Text(
-                           productDummyList[index].price.toString(),style: TextStyles.font15WhiteRegular,
+                        Text(
+                          productModel.price.toString(),
+                          style: TextStyles.font15WhiteRegular,
                           overflow: TextOverflow.ellipsis,
                           maxLines: 1,
                         ),

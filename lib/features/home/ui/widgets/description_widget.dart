@@ -1,15 +1,13 @@
 
-
-
 import 'package:flutter/material.dart';
-import 'package:slash_task/core/constant/constant.dart';
 import 'package:slash_task/core/theming/text_style.dart';
+import 'package:slash_task/features/home/models/product.dart';
 
 class DescriptionWidget extends StatelessWidget {
   const DescriptionWidget({
-    super.key,
+    super.key, required this.productModel,
   });
-
+ final ProductModel productModel;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -25,7 +23,7 @@ class DescriptionWidget extends StatelessWidget {
           ),
           children: [
             Text(
-              description,
+              productModel.description,
               style: TextStyles.font15WhiteRegular,
             ),
           ],

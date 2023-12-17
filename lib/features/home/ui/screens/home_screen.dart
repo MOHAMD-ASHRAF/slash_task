@@ -18,10 +18,10 @@ class HomeScreen extends StatelessWidget {
           backgroundColor: Colors.black38,
           title: Text('home screen',style: TextStyles.font17WhiteBold,),
         ),
-        body:  SingleChildScrollView(
+        body:  const SingleChildScrollView(
           child: Column(
             children: [
-              const HomeProductItemWidget()
+              HomeProductItemWidget()
             ],
           ),
         )

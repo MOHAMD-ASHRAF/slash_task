@@ -16,6 +16,7 @@ class SlashCubit extends Cubit<SlashState> {
   int selectedMaterialIndex = -1;
   int selectedSizeIndex = -1;
   int selectedColorIndex = -1;
+
   List<Color> myColors = [
     Colors.white,
     Colors.red,
@@ -38,7 +39,6 @@ class SlashCubit extends Cubit<SlashState> {
     'silk',
     'wool',
     'lace',
-
   ];
 
   void initState() {

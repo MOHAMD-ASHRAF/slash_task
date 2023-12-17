@@ -4,12 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../logic/slash_cubit.dart';
-import '../../models/prouduct.dart';
+import '../../models/product.dart';
 
 
 class ProductImagesWidget extends StatelessWidget {
-  const ProductImagesWidget({super.key});
-
+  const ProductImagesWidget({super.key, required this.productModel});
+  final ProductModel productModel;
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<SlashCubit, SlashState>(
@@ -22,7 +22,7 @@ class ProductImagesWidget extends StatelessWidget {
                 onPageChanged: (index){
                     SlashCubit.get(context).changeImage(index);
                     },
-                  itemCount: imageList.length,
+                  itemCount: productModel.moreImage.length,
                   physics: const ClampingScrollPhysics(),
                   controller:  SlashCubit.get(context).pageController,
                   itemBuilder: (context, index) {
@@ -38,7 +38,7 @@ class ProductImagesWidget extends StatelessWidget {
               child: ListView.separated(
                 shrinkWrap: true,
                 scrollDirection: Axis.horizontal,
-                itemCount: imageList.length,
+                itemCount: productModel.moreImage.length,
                 itemBuilder: (context, index) {
                   return GestureDetector(
                     onTap: () {
@@ -46,7 +46,7 @@ class ProductImagesWidget extends StatelessWidget {
                        },
                     child: ItemBuilder(
                       selectedIndex: SlashCubit.get(context).selectedImageIndex,
-                      image: imageList[index].image, index: index,
+                      image: productModel.moreImage[index], index: index,
                     ),
                   );
                 },
@@ -73,11 +73,11 @@ class ProductImagesWidget extends StatelessWidget {
             value = (value * 0.038).clamp(-1, 1);
           }
           return Transform.rotate(
-              angle: pi * value, child: carouselCard(imageList[index]));
+              angle: pi * value, child: carouselCard(productModel, index));
         });
   }
 
-  Widget carouselCard(Product product) {
+  Widget carouselCard(ProductModel productModel,int index) {
     return Padding(
       padding: const EdgeInsets.all(20),
       child: Container(
@@ -86,7 +86,7 @@ class ProductImagesWidget extends StatelessWidget {
             borderRadius: BorderRadius.circular(30),
             image: DecorationImage(
                 image: AssetImage(
-                  product.image,
+                  productModel.moreImage[index],
                 ),
                 fit: BoxFit.fill),
             boxShadow: const [

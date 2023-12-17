@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:slash_task/features/home/models/prouduct.dart';
+import 'package:slash_task/features/home/models/product.dart';
 import '../widgets/body_of_product_details_screen.dart';
 
 
@@ -17,12 +17,12 @@ class ProductsDetailsScreen extends StatelessWidget {
             color: Colors.white,
           ),
           centerTitle: true,
-          title: const Text(
-            'products details',
+          title: Text(
+              productModel.name,
             style: TextStyle(color: Colors.white),
           ),
         ),
-        body:  const BodyOfProductDetailsScreen());
+        body:   BodyOfProductDetailsScreen(productModel: productModel,));
   }
 }
 
