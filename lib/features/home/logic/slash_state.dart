@@ -4,3 +4,5 @@ part of 'slash_cubit.dart';
 abstract class SlashState {}
 
 class SlashInitial extends SlashState {}
+class SelectMaterialState extends SlashState {}
+class ChangeImageState extends SlashState {}

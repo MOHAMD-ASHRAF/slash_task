@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
       minTextAdapt: true,
       splitScreenMode: true,
       child: BlocProvider(
-        create: (context) => SlashCubit(),
+        create: (context) => SlashCubit()..initState(),
         child: MaterialApp(
             title: 'Flutter Demo',
             theme: ThemeData(
